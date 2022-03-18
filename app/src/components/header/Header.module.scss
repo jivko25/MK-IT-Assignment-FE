@@ -1,0 +1,23 @@
+@use '../../styles/colors.scss';
+
+.wrapper{
+    background-color: colors.$secondary;
+    padding: 5px;
+}
+
+.search input{
+    color: colors.$text_primary;
+}
+
+.username{
+    color: colors.$text_primary;
+}
+
+.userWrapper{
+    padding: 5px;
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,0 +1,6 @@
+@use './styles/colors.scss';
+
+body {
+  margin: 0;
+  background-color: colors.$background_default;
+}
