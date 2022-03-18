@@ -8,6 +8,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<MyCollection />}/>
                 <Route path="/register" element={<Register />}/>
+                {/* <Route path="/login" element={<Register />}/> */}
             </Routes>
         </BrowserRouter>
     )

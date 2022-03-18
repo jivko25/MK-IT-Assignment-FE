@@ -6,16 +6,20 @@ import axios from 'axios';
 export const Register : React.FC = () => {
 
     const Register = async (username : String, email : String, password : String) => {
-        const res = await axios.post('https://mk-it-assignment-be.vercel.app/api/user/register', 
+        const res : Object = await axios.post('https://mk-it-assignment-be.vercel.app/api/user/register', 
         {
             username,
             email,
             password
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error.response.data);
         })
-        console.log(res);
+        if(res.status == 200){
+            localStorage.setItem('user', JSON.stringify(res.data));
+            window.location.href="/"
+        }
+        
     }
     return(
         <div className={styles.wrapper}>
