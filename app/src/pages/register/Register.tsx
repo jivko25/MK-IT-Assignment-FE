@@ -16,10 +16,14 @@ export const Register : React.FC = () => {
             password
         })
         .catch((error) => {
+<<<<<<< HEAD
             setError(error.response.data);
             setTimeout(() => {
                 setError('');
             }, 5000);
+=======
+            console.log(error.response.data);
+>>>>>>> master
         })
         if(res.status == 200){
             localStorage.setItem('user', JSON.stringify(res.data));
