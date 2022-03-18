@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Header username="test" 
+      <Header username={null} 
       onSearch={() => {console.log('search')}} 
       onLogin={() => {console.log('login')}} 
       onRegister={() => {console.log('register')}} 

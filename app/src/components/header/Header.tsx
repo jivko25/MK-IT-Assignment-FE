@@ -16,15 +16,12 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onRegiste
     const [searchValue, setSearchValue] = useState('');
     return(
         <div className={styles.wrapper}>
-            <Grid container justifyContent={"space-between"}>
+            <Grid container justifyContent={'flex-end'}>
               <Grid item xs={3} className={styles.userWrapper}>
                 {
                   username != null ?
                   <div className={styles.buttonWrapper}>
                     <Typography variant="h6" className={styles.username}>Welcome {username}</Typography>
-                    <Button variant="outlined" onClick={() => onLogout()}>
-                        Logout
-                      </Button>
                   </div>
                   :
                   <div className={styles.buttonWrapper}>
@@ -37,9 +34,11 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onRegiste
                   </div>
                 }
               </Grid>
+              {
+                username != null &&
               <Grid item xs={9}>
                 <Grid container spacing={3} justifyContent="space-between">
-                  <Grid item xs={10}>
+                  <Grid item xs={8}>
                     <TextField
                       label="Search movie in your list"
                       variant='standard'
@@ -54,8 +53,14 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onRegiste
                         Search
                       </Button>
                   </Grid>
+                  <Grid item xs={2} className={styles.buttonWrapper}>
+                  <Button variant="outlined" onClick={() => onLogout()}>
+                        Logout
+                      </Button>
+                  </Grid>
                 </Grid>
               </Grid>
+              }
             </Grid>
         </div>
     )
