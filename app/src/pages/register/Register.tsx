@@ -7,8 +7,10 @@ import { useState } from "react";
 
 export const Register : React.FC = () => {
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const Register = async (username : String, email : String, password : String) => {
+        setIsLoading(true);
         const res : Object = await axios.post('https://mk-it-assignment-be.vercel.app/api/user/register', 
         {
             username,
@@ -16,17 +18,15 @@ export const Register : React.FC = () => {
             password
         })
         .catch((error) => {
-<<<<<<< HEAD
             setError(error.response.data);
             setTimeout(() => {
                 setError('');
             }, 5000);
-=======
-            console.log(error.response.data);
->>>>>>> master
+            setIsLoading(false);
         })
         if(res.status == 200){
             localStorage.setItem('user', JSON.stringify(res.data));
+            setIsLoading(false);
             window.location.href="/"
         }
         
@@ -34,7 +34,7 @@ export const Register : React.FC = () => {
     return(
         <div>
             <div className={styles.wrapper}>
-                <RegisterWrapper onRegister={(username : String, email : String, password : String) => Register(username, email, password)}/>
+                <RegisterWrapper isLoading={isLoading} onRegister={(username : String, email : String, password : String) => Register(username, email, password)}/>
             </div>
             {   
                 error &&

@@ -3,12 +3,14 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react';
 import Button from '@mui/material/Button'
+import { CircularProgress } from '@mui/material';
 
 interface Props{
-    onRegister : Function
+    onRegister : Function,
+    isLoading : Boolean
 }
 
-export const RegisterWrapper : React.FC<Props> = ({onRegister}) => {
+export const RegisterWrapper : React.FC<Props> = ({onRegister, isLoading}) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -39,7 +41,12 @@ export const RegisterWrapper : React.FC<Props> = ({onRegister}) => {
               </Grid>
               <Grid item>
                   <Button variant="text" onClick={() => onRegister(username, email, password)} fullWidth>
-                    Register
+                  {
+                      isLoading ?
+                      <CircularProgress />
+                      :
+                      "Register"
+                    }
                   </Button>
               </Grid>
             </Grid>
