@@ -1,5 +1,6 @@
 import {Grid, TextField, Typography, Button} from '@mui/material';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 
@@ -8,11 +9,10 @@ interface Props{
     username : String,
     onSearch : Function,
     onLogin : Function,
-    onRegister : Function,
     onLogout : Function
 }
 
-export const Header : React.FC<Props> = ({username, onSearch, onLogin, onRegister, onLogout}) => {
+export const Header : React.FC<Props> = ({username, onSearch, onLogin, onLogout}) => {
     const [searchValue, setSearchValue] = useState('');
     return(
         <div className={styles.wrapper}>
@@ -28,9 +28,11 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onRegiste
                     <Button variant="outlined" onClick={() => onLogin()}>
                       Login
                     </Button>
-                    <Button variant="outlined" onClick={() => onRegister()}>
-                      Register
-                    </Button>
+                    <Link to='/register' style={{ textDecoration: 'none' }}>
+                      <Button variant="outlined">
+                        Register
+                      </Button>
+                    </Link>
                   </div>
                 }
               </Grid>

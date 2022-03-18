@@ -20,7 +20,6 @@ function MyCollection() {
       <Header username={user} 
       onSearch={() => {console.log('search')}} 
       onLogin={() => {console.log('login')}} 
-      onRegister={() => {console.log('register')}} 
       onLogout={logout}/>
     </div>
   );
