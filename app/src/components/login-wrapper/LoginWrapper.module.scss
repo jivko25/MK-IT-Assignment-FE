@@ -1,0 +1,11 @@
+@use '../../styles/colors.scss';
+
+.wrapper{
+    background-color: colors.$background_paper;
+    padding: 30px;
+    border-radius: 1rem;
+}
+
+.wrapper input{
+    color: colors.$text_primary
+}

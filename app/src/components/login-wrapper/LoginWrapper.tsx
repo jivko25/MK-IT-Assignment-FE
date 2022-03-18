@@ -1,27 +1,21 @@
-import styles from './RegisterWrapper.module.scss';
+import styles from './LoginWrapper.module.scss';
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react';
 import Button from '@mui/material/Button'
+import { CircularProgress } from '@mui/material';
 
 interface Props{
-    onRegister : Function
+    onLogin : Function,
+    isLoading : Boolean
 }
 
-export const RegisterWrapper : React.FC<Props> = ({onRegister}) => {
-    const [username, setUsername] = useState('');
+export const LoginWrapper : React.FC<Props> = ({onLogin, isLoading}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     return(
         <div className={styles.wrapper}>
             <Grid container spacing={3} direction="column">
-              <Grid item>
-                <TextField
-                  label="Username"
-                  value={username}
-                  onChange={(e) => {setUsername(e.target.value)}}
-                />
-              </Grid>
               <Grid item>
                 <TextField
                     label="Email"
@@ -38,8 +32,13 @@ export const RegisterWrapper : React.FC<Props> = ({onRegister}) => {
                     />
               </Grid>
               <Grid item>
-                  <Button variant="text" onClick={() => onRegister(username, email, password)} fullWidth>
-                    Register
+                  <Button variant="text" onClick={() => onLogin(email, password)} fullWidth>
+                    {
+                      isLoading ?
+                      <CircularProgress />
+                      :
+                      "Login"
+                    }
                   </Button>
               </Grid>
             </Grid>

@@ -1,17 +1,19 @@
-import { RegisterWrapper } from "../../components/register-wrapper/RegisterWrapper.tsx";
-import styles from './Register.module.scss';
+import { RegisterWrapper } from "../../components/login-wrapper/LoginWrapper.tsx";
+import styles from './Login.module.scss';
 import axios from 'axios';
 import { Alert } from "@mui/material";
 import { useState } from "react";
+import { LoginWrapper } from "../login-wrapper/LoginWrapper.tsx";
 
 
-export const Register : React.FC = () => {
+export const Login : React.FC = () => {
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const Register = async (username : String, email : String, password : String) => {
-        const res : Object = await axios.post('https://mk-it-assignment-be.vercel.app/api/user/register', 
+    const Login = async (email : String, password : String) => {
+        setIsLoading(true);
+        const res : Object = await axios.post('https://mk-it-assignment-be.vercel.app/api/user/login', 
         {
-            username,
             email,
             password
         })
@@ -20,9 +22,11 @@ export const Register : React.FC = () => {
             setTimeout(() => {
                 setError('');
             }, 5000);
+            setIsLoading(false);
         })
         if(res.status == 200){
             localStorage.setItem('user', JSON.stringify(res.data));
+            setIsLoading(false);
             window.location.href="/"
         }
         
@@ -30,7 +34,7 @@ export const Register : React.FC = () => {
     return(
         <div>
             <div className={styles.wrapper}>
-                <RegisterWrapper onRegister={(username : String, email : String, password : String) => Register(username, email, password)}/>
+                <LoginWrapper isLoading={isLoading} onLogin={(email : String, password : String) => Login(email, password)}/>
             </div>
             {   
                 error &&

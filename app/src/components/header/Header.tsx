@@ -25,9 +25,11 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onLogout}
                   </div>
                   :
                   <div className={styles.buttonWrapper}>
-                    <Button variant="outlined" onClick={() => onLogin()}>
-                      Login
-                    </Button>
+                    <Link to='/login' style={{ textDecoration: 'none' }}>
+                      <Button variant="outlined" onClick={() => onLogin()}>
+                        Login
+                      </Button>
+                    </Link>
                     <Link to='/register' style={{ textDecoration: 'none' }}>
                       <Button variant="outlined">
                         Register
