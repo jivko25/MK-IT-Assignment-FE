@@ -22,7 +22,7 @@ export const Card : React.FC<Props> = ({item, onPost, onDelete, isAdded, id}) =>
     // (image : string)
     const post = async () => {
       setIsMovieAdded(true);
-      const movie = await onPost(item?.name, date, item?.genres, +item?.weight, item?.summary, item?.officialSite, item?.image.medium)
+      const movie = await onPost(item?.name, date, item?.genres, +item?.weight, item?.summary, item?.officialSite, item?.image ? item?.image.medium : " ")
       console.log(movie.data);
       setMovieId(movie.data._id);
     }
