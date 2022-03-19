@@ -20,7 +20,6 @@ function MyCollection() {
   useEffect(() => {
     pickRandomMovie();
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     setUser(user?.username);
   }, [])
 
@@ -33,7 +32,6 @@ function MyCollection() {
     <div>
       <Header username={user} 
       onSearch={() => {console.log('search')}} 
-      onLogin={() => {console.log('login')}} 
       onLogout={logout}/>
       <Hero image={movie}/>
     </div>

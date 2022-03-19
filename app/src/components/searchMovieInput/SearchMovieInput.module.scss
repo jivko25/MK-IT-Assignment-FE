@@ -1,0 +1,21 @@
+@use '../../styles/colors.scss';
+
+.wrapper{
+    position: relative;
+    background-color: colors.$secondary;
+    width: 70vw;
+    top: 10vh;
+    margin: auto;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    input{
+        color: white;
+    }
+}
+
+.searchBtn{
+    height: 100%;
+}

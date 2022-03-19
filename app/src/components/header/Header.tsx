@@ -8,11 +8,10 @@ import styles from './Header.module.scss';
 interface Props{
     username : String,
     onSearch : Function,
-    onLogin : Function,
     onLogout : Function
 }
 
-export const Header : React.FC<Props> = ({username, onSearch, onLogin, onLogout}) => {
+export const Header : React.FC<Props> = ({username, onSearch, onLogout}) => {
     const [searchValue, setSearchValue] = useState('');
     return(
         <div className={styles.wrapper}>
@@ -26,7 +25,7 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogin, onLogout}
                   :
                   <div className={styles.buttonWrapper}>
                     <Link to='/login' style={{ textDecoration: 'none' }}>
-                      <Button variant="outlined" onClick={() => onLogin()}>
+                      <Button variant="outlined">
                         Login
                       </Button>
                     </Link>
