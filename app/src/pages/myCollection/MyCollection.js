@@ -12,6 +12,9 @@ function MyCollection() {
     const movieArr = Object.keys(images);
     const randomNumber = Math.floor(Math.random() * movieArr.length);
     setMovie(images[movieArr[randomNumber]]);
+    setTimeout(() => {
+      pickRandomMovie()
+    }, 10000);
   }
 
   useEffect(() => {
