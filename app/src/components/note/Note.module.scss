@@ -1,0 +1,7 @@
+@use '../../styles/colors.scss';
+
+
+.noteWrapper{
+    border: 1px solid colors.$secondary;
+    border-radius: 1rem;
+}

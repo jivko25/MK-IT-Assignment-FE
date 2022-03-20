@@ -1,0 +1,40 @@
+@use '../../styles/colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap');
+
+
+.wrapper{
+    border-radius: 1rem;
+    border: 1px solid colors.$secondary;
+    padding: 30px;
+    width: fit-content;
+    max-width: 30vw;
+}
+
+.imageContainer{
+    width: fit-content;
+    overflow: hidden;
+    margin: auto !important;
+}
+
+.image{
+    height: 250px;
+    margin: auto;
+}
+
+.text{
+    font-family: 'Josefin Sans', sans-serif !important;
+    text-align: center;
+}
+
+.titleWrapper{
+    overflow: hidden;
+    width: 350px;
+    height: 50px;
+}
+
+.title{
+    font-family: 'Josefin Sans', sans-serif !important;
+    text-align: center;
+    color: colors.$secondary;
+    width: 100%;
+}

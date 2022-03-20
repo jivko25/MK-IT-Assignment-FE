@@ -5,19 +5,19 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { Button } from "@mui/material"
 import axios from 'axios'
+import { Header } from "../../components/header/Header.tsx"
+import { Note } from "../../components/note/Note.tsx"
 
 
 
 export const Details : React.FC = () => {
     const {movie} = useContext(UserContext);
     const [isMovieAdded, setIsMovieAdded] = useState(movie.isMovieAdded);
-    const [id, setId] = useState(movie.id)
-    const user = JSON.parse(localStorage.getItem('user'));
+    const [id, setId] = useState(movie.id ? movie.id : movie._id);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-        setId(movie.id)
-        console.log(id);
-        
+        setUser(JSON.parse(localStorage.getItem('user')))
     }, [])
     
     console.log(movie);
@@ -45,7 +45,6 @@ export const Details : React.FC = () => {
     }
     
     const deleteMove = async () => {
-        console.log(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}`);
         axios.delete(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}`,
         {
             headers : {
@@ -63,8 +62,30 @@ export const Details : React.FC = () => {
         deleteMove()
         setIsMovieAdded(false)
     }
+
+    const onNote = async (value : string) => {
+        axios.patch(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}/note`,
+        {
+            content : value
+        },
+        {
+            headers : {
+                token : user.token
+            }
+        })
+    }
+
+    const logout = () => {
+        setUser(null);
+        localStorage.clear();
+      }
     return(
-        <div className={styles.wrapper}>
+        <div>
+            <Header username={user?.username}
+            onLogout={logout}
+            />
+
+            <div className={styles.wrapper}>    
             <Grid
               container
               spacing={5}
@@ -83,27 +104,37 @@ export const Details : React.FC = () => {
                         <Grid item className={styles.summaryWrapper}>
                             <div dangerouslySetInnerHTML={{__html: movie?.description}} className={styles.summary}/>
                         </Grid>
-                    <Grid item>
+                    <Grid item className={styles.text}>
                       {
-                        movie?.officialSite &&
-                        <a href={movie?.officialSite}>Visit official site</a>
-                      }
+                          movie?.officialSite &&
+                          <a href={movie?.officialSite}>Visit official site</a>
+                        }
                     </Grid>
                       <Grid item>
-                        <Grid container spacing={3}> 
+                        <Grid container spacing={3} justifyContent="center"> 
                             {
+                                user ?
                                 !isMovieAdded ?
-                                <Grid item>
-                                <Button variant="outlined" color="success" onClick={() => onPost()}>
-                                Add
-                                </Button>
+                                <Grid container spacing={3} direction="column" justifyContent="center">
+                                    <Grid item className={styles.buttonWrapper}>
+                                        <Button variant="outlined" color="success" onClick={() => onPost()}>
+                                        Add
+                                        </Button>
+                                    </Grid>
                                 </Grid>
                                 :
-                                <Grid item>
-                                <Button variant="outlined" color="error" onClick={() => onDelete()}>
-                                Remove
-                                </Button>
+                                <Grid container spacing={3} direction="column" justifyContent="center">
+                                    <Grid item className={styles.buttonWrapper}>
+                                        <Button variant="outlined" color="error" onClick={() => onDelete()}>
+                                        Remove
+                                        </Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <Note onSubmit={(value : string) => onNote(value)} initialValue={''}/>
+                                    </Grid>
                                 </Grid>
+                                :
+                                null
                             }
                             <Grid item>
                             </Grid>
@@ -112,6 +143,7 @@ export const Details : React.FC = () => {
                     </Grid>
                 </Grid>
             </Grid>
+        </div>
         </div>
     )
 }

@@ -82,7 +82,6 @@ export const SearchMovie : React.FC = () => {
     return(
         <div className={styles.wrapper}>
             <Header username={user?.username}
-            onSearch={() => {console.log('search')}} 
             onLogout={logout}
             />
             <SearchMovieInput search={search} onSearchChange={(value : string) => setSearch(value)}/>

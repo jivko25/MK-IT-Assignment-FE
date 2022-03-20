@@ -8,6 +8,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .text{
@@ -35,4 +37,10 @@
     margin-right: -50px;
     padding-right: 50px;
     overflow-y: scroll;
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }

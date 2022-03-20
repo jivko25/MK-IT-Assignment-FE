@@ -7,21 +7,21 @@ import styles from './Header.module.scss';
 
 interface Props{
     username : String,
-    onSearch : Function,
     onLogout : Function
 }
 
-export const Header : React.FC<Props> = ({username, onSearch, onLogout}) => {
-    const [searchValue, setSearchValue] = useState('');
+export const Header : React.FC<Props> = ({username, onLogout}) => {
     return(
         <div className={styles.wrapper}>
             <Grid container justifyContent={'flex-end'}>
               <Grid item xs={3} className={styles.userWrapper}>
                 {
                   username != null ?
-                  <div className={styles.buttonWrapper}>
-                    <Typography variant="h6" className={styles.username}>Welcome {username}</Typography>
-                  </div>
+                  <Link to='/' style={{ textDecoration: 'none' }}>
+                    <div className={styles.buttonWrapper}>
+                      <Typography variant="h6" className={styles.username}>Welcome {username}</Typography>
+                    </div>
+                  </Link>
                   :
                   <div className={styles.buttonWrapper}>
                     <Link to='/login' style={{ textDecoration: 'none' }}>
@@ -42,19 +42,8 @@ export const Header : React.FC<Props> = ({username, onSearch, onLogout}) => {
               <Grid item xs={9}>
                 <Grid container spacing={3} justifyContent="space-between">
                   <Grid item xs={8}>
-                    <TextField
-                      label="Search movie in your list"
-                      variant='standard'
-                      value={searchValue}
-                      onChange={(e) => {setSearchValue(e.target.value)}}
-                      className={styles.search}
-                      fullWidth
-                    />
                   </Grid>
                   <Grid item xs={2} className={styles.buttonWrapper}>
-                      <Button variant="outlined" onClick={() => onSearch()}>
-                        Search
-                      </Button>
                   </Grid>
                   <Grid item xs={2} className={styles.buttonWrapper}>
                   <Button variant="outlined" onClick={() => onLogout()}>

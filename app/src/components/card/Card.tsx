@@ -23,14 +23,12 @@ export const Card : React.FC<Props> = ({item, onPost, onDelete, isAdded, id}) =>
     const [movieId, setMovieId] = useState(id);
     const {movie, setMovie} = useContext(UserContext);
     const date = new Date(item?.premiered).getFullYear();
-    
-    console.log(movieId);
-    
+
+    const user = JSON.parse(localStorage.getItem('user'));
     // (image : string)
     const post = async () => {
       setIsMovieAdded(true);
       const movie = await onPost(item?.name, date, item?.genres, +item?.weight, item?.summary, item?.officialSite, item?.image ? item?.image.medium : " ")
-      console.log(movie.data);
       setMovieId(movie.data._id);
     }
 
@@ -87,6 +85,7 @@ export const Card : React.FC<Props> = ({item, onPost, onDelete, isAdded, id}) =>
                     <Grid item>
                       <Grid container spacing={3}> 
                           {
+                            user ?
                             !isMovieAdded ?
                             <Grid item>
                             <Button variant="outlined" color="success" onClick={() => post()}>
@@ -99,6 +98,8 @@ export const Card : React.FC<Props> = ({item, onPost, onDelete, isAdded, id}) =>
                               Remove
                             </Button>
                             </Grid>
+                            :
+                            null
                           }
                           <Grid item>
                             <Link to={`/details/${movieId != false ? movieId : item?.id}`} style={{ textDecoration: 'none' }}>
