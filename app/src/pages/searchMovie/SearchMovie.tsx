@@ -69,8 +69,7 @@ export const SearchMovie : React.FC = () => {
             .then(data => setMovies(data));
         }
         searchMovies(search);
-        console.log(movies);
-        
+        getUserMovies();
     }, [search])
     
 
