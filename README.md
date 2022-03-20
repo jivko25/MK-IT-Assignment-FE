@@ -6,7 +6,7 @@
 
 ### Why this project is made
 
-This project is back-end part MK-IT-Assignment project.
+This project is Front-End part of MK-IT-Assignment project.
 
 Link to Back-End : https://github.com/jivko25/MK-IT-Assignment-BE
 
