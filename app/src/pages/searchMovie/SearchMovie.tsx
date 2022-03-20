@@ -11,6 +11,7 @@ export const SearchMovie : React.FC = () => {
     const [user, setUser] = useState(null);
     const [movies, setMovies] = useState([]);
     const [userMovies, setUserMovies] = useState([]);
+    
 
     
 
@@ -48,8 +49,6 @@ export const SearchMovie : React.FC = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         setUser(user);
         getUserMovies();
-        console.log(userMovies);
-        
     }, [])
     
     async function getUserMovies(){
