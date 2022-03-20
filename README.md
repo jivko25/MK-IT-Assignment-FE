@@ -1,1 +1,32 @@
-MK-IT-Assignment-FE
+# MK-IT-Assignment-FE
+
+## Description
+
+**Link**: https://mk-it-assignment-fe.vercel.app/
+
+### Why this project is made
+
+This project is back-end part MK-IT-Assignment project.
+
+Link to Back-End : https://github.com/jivko25/MK-IT-Assignment-BE
+
+### Technologies 
+
+* React
+* TypeScript
+* React-Router-Dom
+* MaterialUI
+* Axios
+* Saas
+
+### How to start this project localy
+
+* Download repo
+* Use this commands to run app
+
+```
+cd app
+npm i
+npm start
+```
+
