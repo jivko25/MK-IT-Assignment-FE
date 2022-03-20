@@ -18,6 +18,7 @@ Link to Back-End : https://github.com/jivko25/MK-IT-Assignment-BE
 * MaterialUI
 * Axios
 * Saas
+* This app is deployed on vercel ptalform
 
 ### How to start this project localy
 
