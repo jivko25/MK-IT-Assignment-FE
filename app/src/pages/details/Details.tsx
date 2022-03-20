@@ -7,6 +7,7 @@ import { Button } from "@mui/material"
 import axios from 'axios'
 import { Header } from "../../components/header/Header.tsx"
 import { Note } from "../../components/note/Note.tsx"
+import { Rating } from "../../components/rating/Rating.tsx"
 
 
 
@@ -15,12 +16,34 @@ export const Details : React.FC = () => {
     const [isMovieAdded, setIsMovieAdded] = useState(movie.isMovieAdded);
     const [id, setId] = useState(movie.id ? movie.id : movie._id);
     const [user, setUser] = useState({});
+    const [noteValue, setNoteValue] = useState('');
+    const [ratingValue, setRatingValue] = useState(0);
 
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem('user')))
+        getInitialNoteAndRating();
+        console.log(noteValue);
+        
     }, [])
     
-    console.log(movie);
+    async function getInitialNoteAndRating() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const rating = await axios.get(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}/rating`,
+        {
+            headers : {
+                token : user.token
+            }
+        })
+        const note = await axios.get(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}/note`,
+        {
+            headers : {
+                token : user.token
+            }
+        })
+        
+        setNoteValue(note?.data.content);
+        setRatingValue(rating?.data.content);
+    }
     
     
     const postMovie = async () => {
@@ -75,6 +98,18 @@ export const Details : React.FC = () => {
         })
     }
 
+    const onRating = async (value : Number) => {
+        axios.patch(`https://mk-it-assignment-be.vercel.app/api/user/${user.id}/movies/${id}/rating`,
+        {
+            content : value
+        },
+        {
+            headers : {
+                token : user.token
+            }
+        })
+    }
+
     const logout = () => {
         setUser(null);
         localStorage.clear();
@@ -111,7 +146,7 @@ export const Details : React.FC = () => {
                         }
                     </Grid>
                       <Grid item>
-                        <Grid container spacing={3} justifyContent="center"> 
+                        <Grid container spacing={3} justifyContent="center" sx={{ mt: 1 }}> 
                             {
                                 user ?
                                 !isMovieAdded ?
@@ -123,14 +158,17 @@ export const Details : React.FC = () => {
                                     </Grid>
                                 </Grid>
                                 :
-                                <Grid container spacing={3} direction="column" justifyContent="center">
+                                <Grid container spacing={1} direction="column" justifyContent="center">
                                     <Grid item className={styles.buttonWrapper}>
                                         <Button variant="outlined" color="error" onClick={() => onDelete()}>
                                         Remove
                                         </Button>
                                     </Grid>
                                     <Grid item>
-                                        <Note onSubmit={(value : string) => onNote(value)} initialValue={''}/>
+                                        <Note onSubmit={(value : string) => onNote(value)} id={id}/>
+                                    </Grid>
+                                    <Grid item>
+                                        <Rating id={id} onRatingChange={(value : Number) => onRating(value)}/>
                                     </Grid>
                                 </Grid>
                                 :
